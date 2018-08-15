@@ -2,6 +2,16 @@ import numpy as np
 from libc.math cimport sqrt
 
 cpdef unsigned char [:, :, :] verify_image(unsigned char [:, :, :] ref, unsigned char [:, :, :] test, float tolerance, int cnt):
+    """
+    Cython implementation of Verify_Image (same logic for comparison)
+    Input:
+    - ref  := 3-D numpy array (Blue, Green, Red number values) representing the reference image's pixels
+    - test := " " representing the test image's pixels
+    - tol  := Tolerance for amount of difference in pixels
+    - cnt  := Trial number indicator
+    Output:
+    - cmp_img_data := 3-D numpy array representing the failure image's pixels - red indicates a difference in pixel value
+    """
     cdef int x, y, h, w, exact_match, bad_pix_cnt, pix_sum
     cdef float err_sum, amt_dif, avg_err
     exact_match, bad_pix_cnt, pix_sum = 1, 0, 0

@@ -1,6 +1,16 @@
 import math
 
-def verify_image(ref, test, tolerance, cnt):
+def verify_image(ref, test, tol, cnt):
+    """
+    Pure Python reference implementation of Verify_Image
+    Input:
+    - ref  := List of 3-element tuples (Red, Green, Blue number values) representing the reference image's pixels
+    - test := " " representing the test image's pixels
+    - tol  := Tolerance for amount of difference in pixels
+    - cnt  := Trial number indicator
+    Output:
+    - cmp_img_data := List of 3-element tuples representing the failure image's pixels - red indicates a difference in pixel value
+    """
     pixel_sum, bad_pixel_cnt = 0, 0
     image_exact_match = 1
     err_sum, amount_diff, avg_err = 0.0, 0.0, 0.0
@@ -28,11 +38,11 @@ def verify_image(ref, test, tolerance, cnt):
     print("Image " + str(cnt))
     if image_exact_match:
         print("Image is exact match. Zero percent tolerance.")
-    elif (avg_err / 255) < tolerance:
-        print("Percentage tolerance given: ", tolerance * 100, "%")
-        print("Image passed w/ tolerance: ", avg_err / 255 * 100, "%")
+    elif (avg_err / 255) < tol:
+        print("Percentage tolerance given: {}%".format(tol * 100))
+        print("Image passed w/ tolerance: {}%".format(avg_err / 255 * 100))
     else:
-        print("Percentage tolerance given: ", tolerance * 100, "%")
-        print("Percentage of failure: ", avg_err / 255 * 100, "%")
+        print("Percentage tolerance given: {}%".format(tol * 100))
+        print("Image passed w/ tolerance: {}%".format(avg_err / 255 * 100))
     print("----------------------------------------")
     return cmp_img_data
